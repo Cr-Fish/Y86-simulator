@@ -1,0 +1,175 @@
+html {
+  font-family: 'helvetica neue', helvetica, arial, sans-serif;
+}
+
+body {
+  background-image: url('https://w.wallhaven.cc/full/d6/wallhaven-d6gz33.png');
+  width: 900px;
+  margin: 20px auto;
+  padding: 20px 20px 20px 20px;
+  column-count: 3;
+  column-gap: 20px;
+}
+
+h1, h2, h3, #mem, .dropbtn, #reg, #cc, #clr, #nxt, #regtab, #memtab, #cctab, #pc, #stat{
+  font-family: Impact, Charcoal, sans-serif;
+}
+
+/* header styles */
+
+h1 {/* Y86 */
+  /* margin: 10px; */
+  position: absolute;
+  left: 100px;
+  top: 50px;
+  font-size: 6rem;
+  text-align: center;
+  color: aquamarine;
+  text-shadow: 3px 3px 1px rgb(107, 98, 98);
+}
+
+h3 {/*by YFish&icee*/
+  position: absolute;
+  left: 150px;
+  top: 150px;
+  font-size: 2rem;
+  text-align: center;
+  color: #8eceee;
+  text-shadow: 3px 3px 1px rgb(107, 98, 98);
+}
+
+#nxt {
+  position: absolute;
+  left: 50px;
+  top: 500px;
+  height: 100px;
+  width: 300px;
+  border: none;
+  text-align: center;
+  font-size: 4rem;
+  text-align: center;
+  color: rgb(107, 98, 98);
+  background-color: aquamarine;
+}
+
+#clr {
+  position: absolute;
+  left: 50px;
+  top: 600px;
+  height: 100px;
+  width: 300px;
+  border: none;
+  text-align: center;
+  font-size: 4rem;
+  text-align: center;
+  color: rgb(107, 98, 98);
+  background-color: #8eceee;
+}
+
+#pc {
+  position: absolute;
+  left: 450px;
+  top:100px;
+  height: 50px;
+  width: 120px;
+  background-color: aquamarine;
+  text-align: center;
+  line-height: 45px;
+}
+#stat {
+  position: absolute;
+  left: 572px;
+  top:100px;
+  height: 50px;
+  width: 120px;
+  background-color: #ddd;
+  text-align: center;
+  line-height: 45px;
+}
+#cctab{
+  position: absolute;
+  left: 450px;
+  top: 200px;
+  border: none;
+}
+#memtab{
+  position: absolute;
+  left: 1000px;
+  top: 100px;
+  border: none;
+}
+
+
+#regtab {
+  position: absolute;
+  border: none;
+  left: 450px;
+  top: 400px;
+}
+#reghead, #memhead, #cchead {
+  font-size: 2.5rem;
+  letter-spacing: -3px;
+  color: #8eceee;
+}
+
+td {
+  height: 50px;
+  width: 120px;
+  background-color: #ddd;
+  text-align: center;
+}
+
+.dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+
+/* 下拉菜单 */
+.dropbtn {
+  position: absolute;
+  left: 50px;
+  top: 400px;
+  height: 100px;
+  width: 300px;
+  border: none;
+  text-align: center;
+  line-height: 50px;
+  font-size: 4rem;
+  color: rgb(107, 98, 98);
+  background-color: #8eceee;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  left: 350px;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  font-size: 1rem;
+  text-decoration: none;
+  display: block;
+}
+.dropdown-content a:hover {
+  background-color: #f1f1f1
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #255579;
+}

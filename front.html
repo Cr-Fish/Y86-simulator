@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>Y86</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Faster+One" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+  <button onclick="handleNext()" id="nxt">NEXT</button>
+  <button onclick="handleClr()" id="clr">CLEAR</button>
+
+  <h1>Y86</h1>
+  <h3>by Yfish&icee</h3>
+
+  <div class="dropdown">
+    <button class="dropbtn">SELECT</button>
+    <div class="dropdown-content">
+      <a onclick="pickFile(1)">abs-asum-cmov</a>
+      <a onclick="pickFile(2)">abs-asum-jmp</a>
+      <a onclick="pickFile(3)">asum</a>
+      <a onclick="pickFile(4)">asumi</a>
+      <a onclick="pickFile(5)">asumr</a>
+      <a onclick="pickFile(6)">cjr</a>
+      <a onclick="pickFile(7)">j-cc</a>
+      <a onclick="pickFile(8)">poptest</a>
+      <a onclick="pickFile(9)">prog1</a>
+      <a onclick="pickFile(10)">prog2</a>
+      <a onclick="pickFile(11)">prog3</a>
+      <a onclick="pickFile(12)">prog4</a>
+      <a onclick="pickFile(13)">prog5</a>
+      <a onclick="pickFile(14)">prog6</a>
+      <a onclick="pickFile(15)">prog7</a>
+      <a onclick="pickFile(16)">prog8</a>
+      <a onclick="pickFile(17)">prog9</a>
+      <a onclick="pickFile(18)">prog10</a>
+      <a onclick="pickFile(19)">pushquestion</a>
+      <a onclick="pickFile(20)">pushtest</a>
+      <a onclick="pickFile(21)">ret-hazard</a>
+    </div>
+  </div>
+</head>
+
+<body>
+  <header>
+
+  </header>
+  <text id="pc"></text>
+  <text id="stat"></text>
+  <table id="cctab">
+    <tr id="cchead"></tr>
+    <tr>
+      <td id="zf"></td>
+      <td id="sf"></td>
+      <td id="of"></td>
+    </tr>
+  </table>
+
+  <table id="regtab">
+    <tr id="reghead"></tr>
+    <tr>
+      <td id="rax"></td>
+      <td id="rcx"></td>
+      <td id="rdx"></td>
+      <td id="rbx"></td>
+    </tr>
+    <tr>
+      <td id="rsp"></td>
+      <td id="rbp"></td>
+      <td id="rsi"></td>
+      <td id="rdi"></td>
+    </tr>
+    <tr>
+      <td id="r8"></td>
+      <td id="r9"></td>
+      <td id="r10"></td>
+      <td id="r11"></td>
+    </tr>
+    <tr>
+      <td id="r12"></td>
+      <td id="r13"></td>
+      <td id="r14"></td>
+    </tr>
+  </table>
+
+  <table id="memtab">
+    <tr id="memhead"></tr>
+  </table>
+
+
+  <script>
+    var pos = 0;
+    reghead.textContent = "REG";
+    memhead.textContent = "MEM";
+    cchead.textContent = "CC";
+
+    window.onload = init;
+
+    function handleNext() {
+      populate(pos);
+      ++pos;
+    }
+    function handleClr() {
+      pos = 0;
+      populate(pos);
+      ++pos;
+    }
+
+    var requestURL;
+    function init() {
+      requestURL = 'https://raw.githubusercontents.com/Cr-Fish/Cr-Fish.github.io/main/abs-asum-cmov.json';
+      handleNext();
+    }
+
+
+    function pickFile(x) {
+      switch (x) {
+        case 1: requestURL = 'https://raw.githubusercontents.com/Cr-Fish/Cr-Fish.github.io/main/abs-asum-cmov.json'; break;
+        case 2: requestURL = 'https://raw.githubusercontents.com/Cr-Fish/Cr-Fish.github.io/main/abs-asum-jmp.json'; break;
+        case 3: requestURL = 'https://raw.githubusercontents.com/Cr-Fish/Cr-Fish.github.io/main/asum.json'; break;
+        case 4: requestURL = 'https://raw.githubusercontents.com/Cr-Fish/Cr-Fish.github.io/main/asumi.json'; break;
+        case 5: requestURL = 'https://raw.githubusercontents.com/Cr-Fish/Cr-Fish.github.io/main/asumr.json'; break;
+        case 6: requestURL = 'https://raw.githubusercontents.com/Cr-Fish/Cr-Fish.github.io/main/cjr.json'; break;
+        case 7: requestURL = 'https://raw.githubusercontents.com/Cr-Fish/Cr-Fish.github.io/main/j-cc.json'; break;
+        case 8: requestURL = 'https://raw.githubusercontents.com/Cr-Fish/Cr-Fish.github.io/main/poptest.json'; break;
+        case 9: requestURL = 'https://raw.githubusercontents.com/Cr-Fish/Cr-Fish.github.io/main/prog1.json'; break;
+        case 10: requestURL = 'https://raw.githubusercontents.com/Cr-Fish/Cr-Fish.github.io/main/prog2.json'; break;
+        case 11: requestURL = 'https://raw.githubusercontents.com/Cr-Fish/Cr-Fish.github.io/main/prog3.json'; break;
+        case 12: requestURL = 'https://raw.githubusercontents.com/Cr-Fish/Cr-Fish.github.io/main/prog4.json'; break;
+        case 13: requestURL = 'https://raw.githubusercontents.com/Cr-Fish/Cr-Fish.github.io/main/prog5.json'; break;
+        case 14: requestURL = 'https://raw.githubusercontents.com/Cr-Fish/Cr-Fish.github.io/main/prog6.json'; break;
+        case 15: requestURL = 'https://raw.githubusercontents.com/Cr-Fish/Cr-Fish.github.io/main/prog7.json'; break;
+        case 16: requestURL = 'https://raw.githubusercontents.com/Cr-Fish/Cr-Fish.github.io/main/prog8.json'; break;
+        case 17: requestURL = 'https://raw.githubusercontents.com/Cr-Fish/Cr-Fish.github.io/main/prog9.json'; break;
+        case 18: requestURL = 'https://raw.githubusercontents.com/Cr-Fish/Cr-Fish.github.io/main/prog10.json'; break;
+        case 19: requestURL = 'https://raw.githubusercontents.com/Cr-Fish/Cr-Fish.github.io/main/pushquestion.json'; break;
+        case 20: requestURL = 'https://raw.githubusercontents.com/Cr-Fish/Cr-Fish.github.io/main/pushtest.json'; break;
+        case 21: requestURL = 'https://raw.githubusercontents.com/Cr-Fish/Cr-Fish.github.io/main/ret-hazard.json'; break;
+      }
+      pos = 0;
+      handleNext();
+    }
+
+    async function populate(pos) {
+
+      var request = new Request(requestURL);
+
+      var response = await fetch(request);
+      var file = await response.json();
+
+      if (pos > file.length) {
+        alert("运行结束！");
+        return;
+      }
+      go(file, pos);
+      goReg(file, pos);
+      goMem(file, pos);
+      goCC(file, pos);
+    }
+
+
+    function go(obj, pos) {
+      pc.textContent = "PC: " + obj[pos].PC;
+      stat.textContent = "STAT: " + obj[pos].STAT;
+    }
+
+    function goMem(obj, pos) {
+      var mem = obj[pos].MEM;
+      var table = document.getElementById("memtab");
+
+      var arr = new Array();
+      var idx = 0;
+      //check for change and store changes in arr
+      if (pos > 0) {
+        var pre = obj[pos - 1].MEM;
+        var cur = obj[pos].MEM;
+        for (let key in cur) {
+          if (pre[key] == "undefined" || pre[key] != cur[key]) {
+            arr[idx] = key;
+            ++idx;
+          }
+        }
+      }
+
+      //clear previous mem
+      for (var i = 1; i < table.rows.length;) {
+        table.deleteRow(i);
+      }
+
+      for (let key in mem) {
+        row = document.getElementById("memtab").insertRow();
+        var is = 0;
+
+        //look for change stored in arr
+        for (var n = 0; n < idx; ++n) {
+          if (arr[n] == key) {
+            is = 1;
+          }
+        }
+
+        cell = row.insertCell();
+        cell.innerHTML = key;
+        cell.style.height = '30px';
+        cell.style.width = '50px';
+        if (is == 1) {
+          cell.style.backgroundColor = 'aquamarine';
+        }
+        else {
+          cell.style.backgroundColor = '#ddd';
+        }
+        cell = row.insertCell();
+        cell.innerHTML = mem[key];
+        cell.style.height = '10px';
+        cell.style.width = '300px';
+        if (is == 1) {
+          cell.style.backgroundColor = 'aquamarine';
+        }
+        else {
+          cell.style.backgroundColor = '#ddd';
+        }
+      }
+    }
+
+
+    function goReg(obj, pos) {
+      var reg = obj[pos].REG;
+
+      if (rax.textContent != "rax: " + reg.rax) {
+        rax.textContent = "rax: " + reg.rax;
+        if (pos != 0)
+          rax.style.backgroundColor = 'aquamarine';
+      }
+      else {
+        rax.style.backgroundColor = '#ddd';
+      }
+
+      if (rcx.textContent != "rcx: " + reg.rcx) {
+        rcx.textContent = "rcx: " + reg.rcx;
+        if (pos != 0)
+          rcx.style.backgroundColor = 'aquamarine';
+      }
+      else {
+        rcx.style.backgroundColor = '#ddd';
+      }
+
+      if (rdx.textContent != "rdx: " + reg.rdx) {
+        rdx.textContent = "rdx: " + reg.rdx;
+        if (pos != 0)
+          rdx.style.backgroundColor = 'aquamarine';
+      }
+      else {
+        rdx.style.backgroundColor = '#ddd';
+      }
+
+      if (rbx.textContent != "rbx: " + reg.rbx) {
+        rbx.textContent = "rbx: " + reg.rbx;
+        if (pos != 0)
+          rbx.style.backgroundColor = 'aquamarine';
+      }
+      else {
+        rbx.style.backgroundColor = '#ddd';
+      }
+
+      if (rsp.textContent != "rsp: " + reg.rsp) {
+        rsp.textContent = "rsp: " + reg.rsp;
+        if (pos != 0)
+          rsp.style.backgroundColor = 'aquamarine';
+      }
+      else {
+        rsp.style.backgroundColor = '#ddd';
+      }
+
+      if (rbp.textContent != "rbp: " + reg.rbp) {
+        rbp.textContent = "rbp: " + reg.rbp;
+        if (pos != 0)
+          rbp.style.backgroundColor = 'aquamarine';
+      }
+      else {
+        rbp.style.backgroundColor = '#ddd';
+      }
+
+      if (rsi.textContent != "rsi: " + reg.rsi) {
+        rsi.textContent = "rsi: " + reg.rsi;
+        if (pos != 0)
+          rsi.style.backgroundColor = 'aquamarine';
+      }
+      else {
+        rsi.style.backgroundColor = '#ddd';
+      }
+
+      if (rdi.textContent != "rdi: " + reg.rdi) {
+        rdi.textContent = "rdi: " + reg.rdi;
+        if (pos != 0)
+          rdi.style.backgroundColor = 'aquamarine';
+      }
+      else {
+        rdi.style.backgroundColor = '#ddd';
+      }
+
+      if (r8.textContent != "r8: " + reg.r8) {
+        r8.textContent = "r8: " + reg.r8;
+        if (pos != 0)
+          r8.style.backgroundColor = 'aquamarine';
+      }
+      else {
+        r8.style.backgroundColor = '#ddd';
+      }
+
+      if (r9.textContent != "r9: " + reg.r9) {
+        r9.textContent = "r9: " + reg.r9;
+        if (pos != 0)
+          r9.style.backgroundColor = 'aquamarine';
+      }
+      else {
+        r9.style.backgroundColor = '#ddd';
+      }
+
+      if (r10.textContent != "r10: " + reg.r10) {
+        r10.textContent = "r10: " + reg.r10;
+        if (pos != 0)
+          r10.style.backgroundColor = 'aquamarine';
+      }
+      else {
+        r10.style.backgroundColor = '#ddd';
+      }
+
+      if (r11.textContent != "r11: " + reg.r11) {
+        r11.textContent = "r11: " + reg.r11;
+        if (pos != 0)
+          r11.style.backgroundColor = 'aquamarine';
+      }
+      else {
+        r11.style.backgroundColor = '#ddd';
+      }
+
+      var r12 = document.getElementById("r12");
+      if (r12.textContent != "r12: " + reg.r12) {
+        r12.textContent = "r12: " + reg.r12;
+        if (pos != 0)
+          r12.style.backgroundColor = 'aquamarine';
+      }
+      else {
+        r12.style.backgroundColor = '#ddd';
+      }
+
+      if (r13.textContent != "r13: " + reg.r13) {
+        r13.textContent = "r13: " + reg.r13;
+        if (pos != 0)
+          r13.style.backgroundColor = 'aquamarine';
+      }
+      else {
+        r13.style.backgroundColor = '#ddd';
+      }
+
+      if (r14.textContent != "r14: " + reg.r14) {
+        r14.textContent = "r14: " + reg.r14;
+        if (pos != 0)
+          r14.style.backgroundColor = 'aquamarine';
+      }
+      else {
+        r14.style.backgroundColor = '#ddd';
+      }
+
+    }
+
+    function goCC(obj, pos) {
+
+      var cc = obj[pos].CC;
+
+      if (zf.textContent != "ZF: " + cc.ZF) {
+        zf.textContent = "ZF: " + cc.ZF;
+        zf.style.backgroundColor = 'aquamarine';
+      }
+      else {
+        zf.style.backgroundColor = '#ddd';
+      }
+      if (sf.textContent != "SF: " + cc.SF) {
+        sf.textContent = "SF: " + cc.SF;
+        sf.style.backgroundColor = 'aquamarine';
+      }
+      else {
+        sf.style.backgroundColor = '#ddd';
+      }
+      if (of.textContent != "OF: " + cc.OF) {
+        of.textContent = "OF: " + cc.OF;
+        of.style.backgroundColor = 'aquamarine';
+      }
+      else {
+        of.style.backgroundColor = '#ddd';
+      }
+    }
+
+  </script>
+</body>
+
+</html>
